@@ -67,13 +67,13 @@ function commerce_kickstart_lite_product_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'sku' => array(
-          'weight' => '-10',
+          'weight' => '0',
         ),
         'title' => array(
           'weight' => '-5',
         ),
         'status' => array(
-          'weight' => '35',
+          'weight' => '3',
         ),
       ),
       'display' => array(

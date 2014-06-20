@@ -7,7 +7,12 @@ function commerce_kickstart_migrate_migrate_api() {
   $api = array(
     'api' => 2,
     'migrations' => array(
-      'CommerceKickstartPages' => array('class_name' => 'CommerceKickstartPages'),
+      //'CommerceKickstartPages' => array('class_name' => 'CommerceKickstartPages'),
+      'CommerceKickstartCategories' => array('class_name' => 'CommerceKickstartCategories'),
+      'CommerceKickstartChildCategories' => array('class_name' => 'CommerceKickstartChildCategories'),
+      'CommerceKickstartProductContent' => array('class_name' => 'CommerceKickstartProductContent'),
+      'CommerceKickstartNodeContent' => array('class_name' => 'CommerceKickstartNodeContent'),
+      //'CommerceKickstartManufacturer' => array('class_name' => 'CommerceKickstartManufacturer'),
     ),
     'field handlers' => array(
       'KickstartMigrateTaxonomyTermReferenceFieldHandler',

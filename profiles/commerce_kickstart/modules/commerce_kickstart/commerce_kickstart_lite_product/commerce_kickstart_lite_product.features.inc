@@ -56,6 +56,7 @@ function commerce_kickstart_lite_product_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'product_full',
   );
 
   // Exported image style: product_medium.
@@ -78,6 +79,7 @@ function commerce_kickstart_lite_product_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'product_medium',
   );
 
   // Exported image style: product_thumbnail.
@@ -100,6 +102,7 @@ function commerce_kickstart_lite_product_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'product_thumbnail',
   );
 
   return $styles;
