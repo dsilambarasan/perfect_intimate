@@ -95,7 +95,7 @@ class CommerceKickstartCategories extends Migration{
     );
 
     $term_options['allow_duplicate_terms'] = FALSE;
-    $this->destination = new MigrateDestinationTerm('Product category', $term_options);
+    $this->destination = new MigrateDestinationTerm('product_category', $term_options);
 
     $this->addFieldMapping('name','parent_item_category_id');
     $this->addFieldMapping('description','parent_item_category_desc');
@@ -153,7 +153,7 @@ class CommerceKickstartChildCategories extends Migration{
     );
 
     $term_options['allow_duplicate_terms'] = FALSE;
-    $this->destination = new MigrateDestinationTerm('Product category', $term_options);
+    $this->destination = new MigrateDestinationTerm('product_category', $term_options);
 
     $this->addFieldMapping('name','item_category_id');
     $this->addFieldMapping('description','item_category_desc');
@@ -303,7 +303,7 @@ class CommerceKickstartProductContent extends Migration{
     $this->addFieldMapping('field_manufacturer','MFG_Name');
     $this->addFieldMapping('field_quantity','Quantity_Onhand');
     $this->addFieldMapping('field_selling_uom','Selling_UOM')->defaultValue('EA');
-    $this->addFieldMapping('status','Quantity_Onhand');
+    $this->addFieldMapping('status')->defaultValue(1);
 
     // Unmapped destination fields
     $this->addUnmigratedDestinations(array(
@@ -318,7 +318,7 @@ class CommerceKickstartNodeContent extends Migration{
 
   public function __construct(){
     parent::__construct(MigrateGroup::getInstance("Import content"));
-    //$this->dependencies = array('CommerceKickstartProductContent');
+    $this->dependencies = array('CommerceKickstartProductContent');
 
     $this->description = t("Import list of content");
 
