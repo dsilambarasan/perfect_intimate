@@ -305,10 +305,27 @@ class CommerceKickstartProductContent extends Migration{
     $this->addFieldMapping('field_selling_uom','Selling_UOM')->defaultValue('EA');
     $this->addFieldMapping('status')->defaultValue(1);
 
-    // Unmapped destination fields
-    $this->addUnmigratedDestinations(array(
-      'field_images',
-    ));
+
+    // We will get the image data from a related table in prepareRow()
+    $this->addFieldMapping('field_images', 'images');
+    $this->addFieldMapping('field_images:destination_file', 'images_dest');
+    // Indicate that we want each file to maintain its name, replacing any
+    // previous file of the same name (as opposed to being renamed to avoid
+    // collisions, which is the default).
+    $this->addFieldMapping('field_images:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_images:alt', 'images_alt');
+    $this->addFieldMapping('field_images:title', 'images_alt');
+    $this->addFieldMapping('field_images:source_dir')->defaultValue('sampleimages');
+    $this->addFieldMapping('field_images:preserve_files')->defaultValue(TRUE);
+
+  }
+
+  public function prepareRow($current_row) {
+    $current_row->images[]  = str_pad($current_row->Nalpac_Item_Number, 4, '0', STR_PAD_LEFT) . '.jpg';
+    $current_row->images_dest[]  = str_pad($current_row->Nalpac_Item_Number, 4, '0', STR_PAD_LEFT) . '.jpg';
+    $current_row->images_alt[] = $current_row->Description;
+    $current_row->images_src[] = 'sampleimages';
   }
 
 }
@@ -372,8 +389,6 @@ class CommerceKickstartNodeContent extends Migration{
   }
 
   public function prepare($node, stdClass $row) {
-    //print_r($node);
-    //print_r($row); exit;
     if (!is_array($node->field_product_category)) {
       $term = current(taxonomy_get_term_by_name($node->field_product_category, 'product_category'));
       $node->field_product_category[LANGUAGE_NONE] = array($term->tid);
