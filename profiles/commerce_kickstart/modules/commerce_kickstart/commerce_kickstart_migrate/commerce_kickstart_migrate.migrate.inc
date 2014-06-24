@@ -326,6 +326,7 @@ class CommerceKickstartProductContent extends Migration{
     $current_row->images_dest[]  = str_pad($current_row->Nalpac_Item_Number, 4, '0', STR_PAD_LEFT) . '.jpg';
     $current_row->images_alt[] = $current_row->Description;
     $current_row->images_src[] = 'sampleimages';
+    $current_row->WholeSale_Price = $current_row->WholeSale_Price * 2.5;
   }
 
 }
